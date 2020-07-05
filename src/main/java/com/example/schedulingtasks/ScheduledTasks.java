@@ -5,6 +5,10 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.lang.Thread.State;
+import java.util.List;
+
+import com.example.schedulingtasks.models.Person;
 import com.example.schedulingtasks.service.PersonService;
 
 @Component
@@ -12,15 +16,15 @@ public class ScheduledTasks {
 	
 	@Autowired PersonService service;
 	
-	@Scheduled(fixedRate = 1000)
-	@Async
+	@Scheduled(fixedDelay = 2000)
+	// @Async
 	public void reportCurrentTime() {
-		System.out.println("start task 0");
-		service.getPeople(0, "task 0");
-		System.out.println("end task 0");
+		long startTime = System.currentTimeMillis();
+		List<Person> people2 = service.getPeopleOldWay();
+		System.out.println("Execution time: " + (System.currentTimeMillis() - startTime));
 	}
 
 
-	
+
 
 }

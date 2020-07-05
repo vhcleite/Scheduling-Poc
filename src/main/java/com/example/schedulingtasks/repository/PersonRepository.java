@@ -1,5 +1,6 @@
 package com.example.schedulingtasks.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.LockModeType;
@@ -15,5 +16,9 @@ public interface PersonRepository extends JpaRepository<Person, Integer>{
 	@Override
 	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	public List<Person> findAll();
+
+
+	@Lock(LockModeType.PESSIMISTIC_WRITE)
+	public List<Person> findTop2ByNextCheckBeforeOrderByNextCheckAsc(LocalDateTime now);
 	
 }

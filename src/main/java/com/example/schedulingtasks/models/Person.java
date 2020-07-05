@@ -3,9 +3,12 @@ package com.example.schedulingtasks.models;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Person {
@@ -15,7 +18,11 @@ public class Person {
 	
 	private String name;
 	
-	private LocalDateTime lastCheck;
+	private LocalDateTime nextCheck;
+
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private PersonDetails details;
 	
 	public Person() {
 		
@@ -43,16 +50,18 @@ public class Person {
 		this.name = name;
 	}
 	
-	public LocalDateTime getLastCheck() {
-		return lastCheck;
+	public LocalDateTime getNextCheck() {
+		return nextCheck;
 	}
 
-	public void setLastCheck(LocalDateTime lastCheck) {
-		this.lastCheck = lastCheck;
+	public void setNextCheck(LocalDateTime lastCheck) {
+		this.nextCheck = lastCheck;
 	}
 
 	@Override
 	public String toString() {
-		return "Person [id=" + id + ", name=" + name + ", lastCheck=" + lastCheck + "]";
+		return "Person [name=" + name + "]";
 	}
+
+	
 }
