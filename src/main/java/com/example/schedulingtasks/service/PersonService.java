@@ -47,7 +47,6 @@ public class PersonService {
 	public List<Person> getPeopleOldWay() {
 		LocalDateTime now = LocalDateTime.now();
 
-		// EntityManagerFactory emf = Persistence.createEntityManagerFactory("Person");
 		Map<String, Object> properties = new HashMap<>();
 		properties.put("javax.persistence.lock.timeout", 3000);
 		EntityManager em = emf.createEntityManager(properties);

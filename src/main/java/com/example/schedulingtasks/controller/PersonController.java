@@ -2,6 +2,8 @@ package com.example.schedulingtasks.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.schedulingtasks.models.Person;
+import com.example.schedulingtasks.models.dto.PersonPostDto;
 import com.example.schedulingtasks.service.PersonService;
 
 @RestController
@@ -25,8 +28,8 @@ public class PersonController {
 	private PersonService service;
 	
 	@PostMapping
-	public Person post(@RequestBody Person person) {
-		return service.save(person);
+	public Person post(@Valid @RequestBody PersonPostDto person) {
+		return service.save(new Person(null, person.getName()));
 	}
 	
 	@GetMapping
